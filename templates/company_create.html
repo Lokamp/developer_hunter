@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block container %}
+<main class="container mt-3 pb-5">
+ <!-- <div class="row mt-5">
+  <div class="col-12 col-lg-8">
+    <div class="card">
+      <div class="card-body px-4 pb-4 tab-content">-->
+        <!-- Tab -->
+        <section class="col-12 col-lg-6 offset-lg-3 mt-5 card">
+          <h2 class="h4 pt-2 pb-3">Создание компании</h2>
+          {% for message in messages %}
+            <p class="alert alert-info" role="alert">{{message}}</p>
+          {% endfor %}
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for fields in form %}
+            <div class="row">
+              <div class="col-12 col-md-8">
+                <div class="form-group pb-2">
+                    <label class="mb-2 text-dark" for="vacancySalaryMin">
+                        {{ fields.label }}
+                    </label>
+                    {{ fields }}
+                    {{ fields.errors }}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="form-group">
+              <input type="submit" class="btn btn-info" value="Сохранить">
+            </div>
+          </form>
+          <!-- END Vacancy info -->
+        </section>
+        <!-- END Tab -->
+       <!--</div>
+      </div>
+    </div>
+</div>-->
+</main>
+{% endblock %}

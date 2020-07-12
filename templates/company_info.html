@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block container %}
+<main class="container mt-3 pb-5">
+<div class="row mt-5">
+  <div class="col-12 col-lg-4">
+    <aside class="pt-3 pb-4 px-4 mb-5 card">
+      <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" href="{% url 'company_profile_info' %}">1. Информация о&nbsp;компании</a>
+        <a class="nav-link" href="{% url 'company_profile_vacancy' %}">2. Вакансии</a>
+
+      </div>
+    </aside>
+  </div>
+  {% for company in company %}
+  <div class="col-12 col-lg-8">
+    <div class="card">
+      <div class="card-body px-4 pb-4">
+        <section class="tab-pane fade show active">
+          <h2 class="h4 pt-2 pb-3">{{ company.name }}</h2>
+          {% for message in messages %}
+            <p class="alert alert-info" role="alert">{{message}}</p>
+          {% endfor %}
+          <!-- vacancy state 1 -->
+          <div class="card mt-3">
+            <div class="card-body px-4">
+              <div class="row align-items-center">
+                <div class="col-6 col-lg-12">
+                  <div>
+                    <img src="{{ company.logo.url }}" width="130" height="80" alt="">
+                  </div>
+                  <p class="mb-1">
+                    {{ company.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END vacancy state 1 -->
+          <!-- vacancy state 2 -->
+          <div class="card mt-3">
+            <div class="card-body px-4">
+              <div class="row align-items-center">
+                <div class="col-6 col-lg-8">
+                    <span><b>Город</b></span>
+                    <p class="mt-2">{{ company.location }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-4">
+              <div class="row align-items-center">
+                <div class="col-6 col-lg-8">
+                    <span><b>Количество сотрудников</b></span>
+                    <p class="mt-2">{{ company.employee_count }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+                <div class="col-sm">
+                <p class="mt-3">
+                <a href="{% url 'company_info_edit' company.id %}" class="btn btn-outline-info">Изменить</a>
+                </p>
+                </div>
+            </div>
+          <!-- END vacancy state 2 -->
+        </section>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</main>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block container %}
+<main class="container">
+    <div class="row">
+      <div class="col-8 col-lg-4 offset-2 offset-lg-4">
+      <form class="form-signin pt-5" method="post">
+        {% csrf_token %}
+          <div class="text-center mt-5 b-1">
+
+            <h1 class="h3 mb-3 font-weight-normal"></h1>
+            <p class="h5 font-weight-light">Вы успешно зарегистрировались!</p><br>
+            <p class="h5 font-weight-light">Введите имя пользователя и пароль, чтобы перейти в личный кабинет</p><br>
+          </div>
+          <label class="mb-2 text-dark" for="vacancySalaryMin">Имя пользователя</label>
+          <input class="form-control" id="{{ form.username.label }}" maxlength="30" name="{{ form.username.html_name }}" type="text" />
+          <label class="mb-2 text-dark" for="vacancySalaryMin">Пароль</label>
+          <input class="form-control" id="{{ form.password.label }}" maxlength="30" name="{{ form.password.html_name }}" type="password" />
+          {{ form.non_field_errors }}
+          {{ form.errors }}
+          <div class="checkbox mb-3"></div>
+          <div class="checkbox mb-3"></div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Войти</button>
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}

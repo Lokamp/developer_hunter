@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block container %}
+  <main class="container mt-3">
+    <section>
+        <h1>Профиль</h1>
+        <p>Данной страницы не было в техническом задании, но мы реализовали её для Вашего удобства</p>
+        <p><b>Ваш Логин:</b> {{ user.username }}</p>
+        <p><b>Ваш Email:</b> {{ user.email }}</p>
+        <p>Скоро появится возможность изменения пароля!</p>
+
+    </section>
+  </main>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block container %}
+
+  <main class="container mt-3 pb-5">
+    <div class="row mt-5">
+      <div class="col-12 col-lg-2">
+        <div class="pl-3 mb-1">
+          <p><a href="{{ request.META.HTTP_REFERER }}">Назад</a></p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8">
+      {% for message in messages %}
+        <p class="alert alert-info" role="alert">{{message}}</p>
+      {% endfor %}
+        <section class="pl-3">
+          <a href="{% url 'company_id' vacancy.company.id %}"><img src="{{ vacancy.company.logo.url }}" width="130" height="80" alt=""></a>
+          <div class="d-flex align-items-baseline align-content-baseline">
+            <h1 class="h2 mt-4 font-weight-bold" >{{ vacancy.title }}</h1>
+          </div>
+          <p class="mt-2">{{ vacancy.salary_min }} – {{ vacancy.salary_max }} Р</p>
+          <p class="mt-2">{{ vacancy.skills }}</p>
+            <p class="text-muted mb-4">{{ vacancy.company.name|capfirst }}
+                ({{ vacancy.company.employee_count }} человек),
+                {{ vacancy.company.location }}
+            </p>
+          <div style="line-height: 1.8;">
+            {{ vacancy.description }}
+          </div>
+          <form method="post" class="card mt-4 mb-3">
+            {% csrf_token %}
+            <div class="card-body mx-3">
+              <p class="h5 mt-3 font-weight-normal">Отозваться на вакансию</p>
+              <div class="form-group">
+                <label class="mb-1 mt-2" for="userName">Вас зовут</label>
+                  {{ form.written_username }}
+              </div>
+              <div class="form-group">
+                <label class="mb-1" for="userPhone">Ваш телефон</label>
+                  {{ form.written_phone }}
+              </div>
+              <div class="form-group">
+                <label class="mb-1" for="userMsg" >Сопроводительное письмо</label>
+                {{ form.written_cover_letter }}
+              </div>
+              <input type="submit" class="btn btn-primary mt-4 mb-2" value="Отправить заявку">
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+{% endblock %}

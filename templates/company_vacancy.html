@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block container %}
+<main class="container mt-3 pb-5">
+<div class="row mt-5">
+  <div class="col-12 col-lg-4">
+    <aside class="pt-3 pb-4 px-4 mb-5 card">
+      <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" href="{% url 'company_profile_info' %}">1. Информация о&nbsp;компании</a>
+        <a class="nav-link active" href="{% url 'company_profile_vacancy' %}">2. Вакансии</a>
+      </div>
+    </aside>
+  </div>
+  <div class="col-12 col-lg-8">
+    <div class="card">
+      <div class="card-body px-4 pb-4 tab-content">
+        <!-- Tab -->
+        <section class="pl-3">
+
+          <a href=""><img src="{{ vacancy.company.logo.url }}" width="130" height="80" alt=""></a>
+          <div class="d-flex align-items-baseline align-content-baseline">
+            <h1 class="h2 mt-4 font-weight-bold" >{{ vacancy.title }}</h1>
+          </div>
+          <p class="mt-2">{{ vacancy.salary_min }} – {{ vacancy.salary_max }} Р</p>
+          <p class="mt-2">{{ vacancy.skills }}</p>
+            <p class="text-muted mb-4">
+                ({{ vacancy.company.employee_count }} человек),
+                {{ vacancy.company.location }}
+            </p>
+          <div style="line-height: 1.8;">
+            {{ vacancy.description }}
+          </div>
+
+          <br>
+          <!-- END Vacancy info -->
+          <!-- Applications -->
+          <h2 class="h4 pt-2 pb-3">Отклики - {{ apps.count }}</h2>
+          <!-- Application 1 -->
+          {% for app in apps %}
+
+          <div class="card mt-3">
+            <div class="card-body px-4">
+              <p class="mb-1 font-weight-bold">{{ app.written_username }}</p>
+              <p class="mb-2"><a href="tel:+79002842324" class="text-dark">{{ app.written_phone }}</a></p>
+              <p class="mb-1">{{ app.written_cover_letter }}</p>
+            </div>
+          </div>
+          <!-- END Application 1 -->
+          <!-- Application 1 -->
+
+          {% endfor %}
+          <!-- END Application 1 -->
+          <!-- END Applications -->
+        </section>
+        <!-- END Tab -->
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+{% endblock %}

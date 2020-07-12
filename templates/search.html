@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block container %}
+  <main class="container mt-3">
+    {% for message in messages %}
+        <p class="alert alert-info" role="alert">{{message}}</p>
+    {% endfor %}
+    <form class="form-inline mb-3">
+        <div class="form-group col-8 col-md-10 pl-0">
+          <input class="form-control w-100" name="search" type="search" placeholder="Найти работу или стажировку" aria-label="Найти работу или стажировку">
+        </div>
+        <div class="form-group col-4 col-md-2 pl-0">
+          <button class="btn btn-primary w-100" type="submit">Найти</button>
+        </div>
+    </form>
+    <section>
+      <p class="mx-auto mt-2 pt-2" style="font-size: 20px;"><strong>Поиск по фразе "{{ search }}"</strong></p>
+      <p class="pt-1">Кол-во найденных вакансий <b>{{ vacancies.count }}</b></p>
+      {% for vacancy in vacancies %}
+      <div class="row mt-5">
+        <div class="col-12 col-lg-8 offset-lg-2 m-auto">
+          <div class="card mb-4">
+            <div class="card-body px-4">
+              <div class="row">
+                <div class="col-12 col-md-8 col-lg-9">
+                  <h2 class="h2 pb-2"><a href="{% url 'vacancy_id' vacancy.id %}" style="color: #000000">{{ vacancy.title }}</a></h2>
+                  <p class="mb-2">{{ vacancy.skills }}</p>
+                  <p>От {{ vacancy.salary_min }} до {{ vacancy.salary_max }} руб.</p>
+                  <p class="text-muted pt-1">{{ vacancy.published_at }}</p>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3 d-flex align-items-end">
+                  <a href="#"><img src="{{ vacancy.company.logo.url }}" width="130" height="80" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+{% endblock %}
