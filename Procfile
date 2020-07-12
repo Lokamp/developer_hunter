@@ -1,1 +1,1 @@
-web: gunicorn junior_hunter.wsgi
+web: gunicorn developer_hunter.wsgi
