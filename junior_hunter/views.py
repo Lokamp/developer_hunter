@@ -14,10 +14,11 @@ from junior_hunter.models import Specialty, Company, Vacancy, Application, Resum
 
 class MainView(View):
     """Главная страница. Выводятся специальности (до 8) и компании до (16)"""
-
     def get(self, request):
-        specialties = Specialty.objects.all()[:8]
-        companies = Company.objects.all()[:16]
+        number_specialties_main_page = 8
+        number_companies_main_page = 16
+        specialties = Specialty.objects.all()[:number_specialties_main_page]
+        companies = Company.objects.all()[:number_companies_main_page]
         context = {
             'specialties': specialties,
             'companies': companies
@@ -55,7 +56,7 @@ class VacanciesView(View):
 
 
 class VacancyView(View):
-    """Просмотр отдельно взятой вакансии. С возможность отправить отклик.
+    """Просмотр отдельно взятой вакансии. С возможностью отправить отклик.
     Отклик может отправлять только зарегистрированный пользователь"""
 
     def get(self, request, vacancy_id):
@@ -164,7 +165,7 @@ class CreateCompanyProfile(View):
 
 
 class CompanyProfileInfo(View):
-    """Информаци о компании в профиле.
+    """Информация о компании в профиле.
     Если компания не создана - идет передресация на страницу создания компании"""
 
     def get(self, request):
