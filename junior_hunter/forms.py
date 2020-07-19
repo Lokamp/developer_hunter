@@ -46,6 +46,16 @@ class RegForm(UserCreationForm):
         ]
 
 
+    def clean_password1(self):
+        cyrillic = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л",
+                    "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш",
+                    "щ", "ъ", "ы", "ь", "э", "ю", "я"]
+        password = self.cleaned_data.get('password1')
+        for letter in cyrillic:
+            if letter in password.lower():
+                raise forms.ValidationError('Нельзя использовать русские буквы в пароле')
+
+
 class CompanyInfoForms(forms.ModelForm):
     logo = forms.ImageField(
         label='Загрузите картинку'
